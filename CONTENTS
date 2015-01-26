@@ -1,0 +1,53 @@
+The following is a brief description of the files in the project:
+
+.gitignore
+  Specifies files to ignore under the git version control system
+CONTENTS
+  This file
+COPYING
+  GPL 3.0 license text
+README.md
+  Brief description of the project, image installation and use
+configs/b2_live_usb_config
+  The .config used on the live-USB image kernel (assumes you have an
+  internal hard drive in your B2, the most usual case); command line
+  set to wait 5 seconds after boot, then look for a root on /dev/sdb3
+configs/b2_live_usb_diskless_config
+  As above, but targeting the case where you have no internal drive in
+  your B2 (looks for root on /dev/sda3 instead)
+configs/b2_sda3_root_config
+  The .config used when booting directly from the internal hard drive
+  (looks for a root on /dev/sda3, but no rootdelay)
+configs/b2_stock_config
+  The .config from a standard B2 (running Linux 2.6.39), which informed the
+  above
+reference/8313E21.dts
+  Device tree description for the B2, reverse compiled from the 8313E21.dtb
+  file, from a shipped B2's /boot directory
+reference/buildkernel-b2.pdf
+  PDF version of the manpage for the buildkernel-b2 utility; explains (inter alia)
+  how the kernel relocation shim works
+reference/fstab-on-b2
+  The /etc/fstab to be used if installing onto the internal drive; has
+  boot on /dev/sda1, swap on /dev/sda2, and root on /dev/sda3
+reference/fstab-on-live-usb
+  The /etc/fstab from the main USB image; has boot on /dev/sdb1,
+  swap on /dev/sdb2, and root on /dev/sdb3 (we preserve the swap even when
+  booting from USB, as the B2 is so memory constrained)
+reference/fstab-on-live-usb-diskless
+  The /etc/fstab from the diskless USB image; identical to fstab-on-b2
+reference/genup-lite.pdf
+  PDF version of the manpage for the genup-lite utility; explains the stepwise
+  process of updating a Gentoo system
+reference/installed-packages
+  Full list of installed packages, from eix-installed all; the version numbers
+  are Gentoo ebuilds, but they generally map 1-to-1 onto upstream versions
+reference/showem-lite.pdf
+  PDF version of the manpage for the showem-lite utility (used to monitor
+  parallel emerge runs)
+utils/prep_arm_image.sh
+  Utility script used to build a B3 kernel when cross-compiling on a
+  Gentoo PC (executed in the top-level kernel source directory)
+utils/prep_arm_image_on_b3.sh
+  Utility script used to build a B3 kernel when compiling on the B3
+  itself (executed in the top level kernel source directory)

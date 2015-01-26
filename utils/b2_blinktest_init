@@ -1,0 +1,23 @@
+#!/bin/busybox sh
+# Bring up a simple busybox system and flash LEDs.
+# Copyright (c) 2015 sakaki <sakaki@deciban.com>
+# License: GPL 3.0+
+# NO WARRANTY
+
+# Mount the /proc and /sys filesystems.
+/bin/busybox mount -t proc none /proc
+/bin/busybox mount -t sysfs none /sys
+/bin/busybox mount -t devpts none /dev/pts
+# ensure all symlinks are present
+/bin/busybox --install -s
+
+echo "Blinking LED!"
+
+# loop forever
+echo "5000" > /sys/devices/platform/bubbatwo/ledfreq
+while true; do
+    echo "blink" > /sys/devices/platform/bubbatwo/ledmode
+    sleep 2;
+    echo "lit" > /sys/devices/platform/bubbatwo/ledmode
+    sleep 2;
+done
