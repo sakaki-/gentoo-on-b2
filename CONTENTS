@@ -45,9 +45,5 @@ reference/installed-packages
 reference/showem-lite.pdf
   PDF version of the manpage for the showem-lite utility (used to monitor
   parallel emerge runs)
-utils/prep_arm_image.sh
-  Utility script used to build a B3 kernel when cross-compiling on a
-  Gentoo PC (executed in the top-level kernel source directory)
-utils/prep_arm_image_on_b3.sh
-  Utility script used to build a B3 kernel when compiling on the B3
-  itself (executed in the top level kernel source directory)
+utils/b2_blinktest_init
+  The init (a busybox ash shell script) used in the blinktest image
