@@ -244,6 +244,7 @@ b2 ~ # mkdir /mnt/sdaroot/{boot,home,media,mnt,opt,proc,run,sys}
 Since we simply copied over the `/etc/fstab` file, it will be wrong; a valid copy (for the internal drive) is present in `root`'s home directory on the USB image. Copy it over now:
 ```
 b2 ~ # cp /root/fstab-on-b2 /mnt/sdaroot/etc/fstab
+b2 ~ # sed -i 's/vfat/ext3/g' /mnt/sdaroot/etc/fstab
 ```
 Finally, `sync` the filesystem, and unmount:
 ```
@@ -256,7 +257,10 @@ That's it! You can now try rebooting your new system (it will have the same init
 ```
 b2 ~ # reboot
 ```
-And let the system shut down and come back up. **Don't** press the B2's back-panel button this time. The system should boot directly off the hard drive. You can now remove the USB key, if you like, as it's no longer needed. Wait 60 seconds or so, then from your PC on the same subnet issue:
+And let the system shut down and come back up. **Don't** press the B2's back-panel button this time. The system should boot directly off the hard drive. You can now remove the USB key, if you like, as it's no longer needed.
+> Note - on some SDDs, it can actually take *longer* to boot from the internal drive than from the USB key, because of U-Boot's drivers. Allow an extra 60 seconds or so over the usual boot time for the front LED to stop blinking, before deciding that you have a problem.
+
+Wait for the front light to turn solid on, then after a further 20 seconds or so from your PC on the same subnet issue:
 ```
 > ssh root@192.168.1.122
 Password: <type gentoob2 and press Enter>
