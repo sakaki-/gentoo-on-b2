@@ -237,8 +237,8 @@ Note that this kernel will be booted *without* the button pressed down, so it ne
 
 Next, we'll set up the `root` partition itself. The process below isn't quite what your mother would recommend ^-^, but it gets the job done (the first line may take some time to complete):
 ```
-b2 ~ # cp -ax /bin /dev /etc /lib /root /sbin  /tmp /usr /var /mnt/sdaroot/
-b2 ~ # mkdir /mnt/sdaroot/{boot,home,media,mnt,opt,proc,run,sys}
+b2 ~ # cp -ax /bin /dev /etc /home /lib /root /sbin /tmp /usr /var /mnt/sdaroot/
+b2 ~ # mkdir /mnt/sdaroot/{boot,media,mnt,opt,proc,run,sys}
 ```
 
 Since we simply copied over the `/etc/fstab` file, it will be wrong; a valid copy (for the internal drive) is present in `root`'s home directory on the USB image. Copy it over now:
