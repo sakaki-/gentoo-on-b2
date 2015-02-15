@@ -13,8 +13,8 @@ The images may be downloaded from the links below (or via `wget`, per the follow
 
 Variant | Image | Digital Signature
 :--- | ---: | ---:
-B2 with Internal Drive | [genb2img.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2img.xz) | [genb2img.zx.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2img.xz.asc)
-Diskless B2 | [genb2disklessimg.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2disklessimg.xz) | [genb2disklessimg.zx.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2disklessimg.xz.asc)
+B2 with Internal Drive | [genb2img.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2img.xz) | [genb2img.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2img.xz.asc)
+Diskless B2 | [genb2disklessimg.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2disklessimg.xz) | [genb2disklessimg.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2disklessimg.xz.asc)
 USB Key Compatibility Tester | [blinktestimg.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/blinktestimg.xz) | [blinktestimg.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/blinktestimg.xz.asc)
 
 > Please read the instructions below before proceeding. Also please note that these images are provided 'as is' and without warranty.
