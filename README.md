@@ -167,14 +167,14 @@ Have fun! ^-^
 
 ## <a name="hdd_install">Installing Gentoo on your B2's Internal Drive (Optional)
 
-If you like Gentoo, and want to set it up permanently on the B2's internal hard drive, you can do so easily (it takes less than 10 minutes). The full process is described below. (Note, this is strictly optional, you can simply run Gentoo from the USB key, if you are just experimenting, or using it as a rescue system.)
+If you like Gentoo, and want to set it up permanently on the B2's internal hard drive, you can do so easily (it takes less than 15 minutes). The full process is described below. (Note, this is strictly optional, you can simply run Gentoo from the USB key, if you are just experimenting, or using it as a rescue system.)
 
 > **Warning** - the below process will wipe all existing software and data from your internal drive, so be sure to back that up first, before proceeding. It will set up:
 * /dev/sda1 as a 64MiB boot partition, and format it `ext3`;
 * /dev/sda2 as a 1GiB swap partition;
 * /dev/sda3 as a root partition using the rest of the drive, and format it `ext4`.
 
-> Note also that the script [`/root/install_on_sda.sh`](https://github.com/sakaki-/gentoo-on-b2/blob/master/reference/install_on_sda.sh) will install using a DOS partition table (max 2TiB); if you'd rather use GPT, then use [`/root/install_on_sda_gpt.sh`](https://github.com/sakaki-/gentoo-on-b2/blob/master/reference/install_on_sda_gpt.sh) instead. The B2 can boot from a GPT-partitioned drive; however, please note that if your HDD has a capacity > 2TiB, then only those B2s flashed with a [relatively modern](http://forum.mybubba.org/viewtopic.php?f=9&t=5745) U-Boot will work correctly. The DOS partition table version should work for any size drive (but will be constrained to a maximum of 2TiB, even if your drive is larger).
+> Note also that the script [`/root/install_on_sda.sh`](https://github.com/sakaki-/gentoo-on-b2/blob/master/reference/install_on_sda.sh) will install using a DOS partition table (max 2TiB); if you'd rather use GPT, then use [`/root/install_on_sda_gpt.sh`](https://github.com/sakaki-/gentoo-on-b2/blob/master/reference/install_on_sda_gpt.sh) instead; however, do bear in mind that the 'stock' B2 U-boot (version 1.3.4-00056-gf6f51b1-dirty on my device) does **not** support booting from GPT drives.
 
 OK, first, boot into the image and then connect to your B2 via `ssh`, as described above. Then, (as of version 1.1.0) you can simply run the supplied script to install onto your hard drive:
 ```
