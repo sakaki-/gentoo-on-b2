@@ -1,57 +1,48 @@
 # gentoo-on-b2
 
-Bootable live-USB of Gentoo Linux for the Excito B2 miniserver, with Linux 3.18.2
+Bootable live-USB of Gentoo Linux for the Excito B2 miniserver, with Linux 4.0.4
 
 ## Description
 
 <img src="https://raw.githubusercontent.com/sakaki-/resources/master/excito/b2/Excito_b2.jpg" alt="Excito B2, aka Bubba|TWO" width="250px" align="right"/>
 This project contains a bootable, live-USB image for the Excito B2 (aka Bubba|TWO) miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B2's main hard drive. You can even use it on a diskless B2. No soldering, compilation, or [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) flashing is required! You can run it without harming your B2's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence). Also, as with its [sister B3 project](https://github.com/sakaki-/gentoo-on-b3), a number of useful software packages (web server, mail server etc.) are included precompiled with the image (in their 'freshly emerged' configuration state), for convenience.
 
-The kernel used in the image is **3.18.2** from gentoo-b2-sources (i.e., the [kernel.org](https://www.kernel.org) sources, with Gentoo and [B2-specific](https://github.com/sakaki-/gentoo-b2-kernel-patches/) patches applied). The `.config` used for the kernel may be found [here](https://github.com/sakaki-/gentoo-on-b2/blob/master/configs/b2_live_usb_config) in the git archive.
+The kernel used in the image is **4.0.4** from gentoo-b2-sources (i.e., the [kernel.org](https://www.kernel.org) sources, with Gentoo and [B2-specific](https://github.com/sakaki-/gentoo-b2-kernel-patches/) patches applied). The `.config` used for the kernel may be found [here](https://github.com/sakaki-/gentoo-on-b2/blob/master/configs/b2_live_usb_config) in the git archive.
 
-The images may be downloaded from the links below (or via `wget`, per the following instructions). Most people will want to use the `genb2img.xz` variant - the diskless version should *only* be used if you have no drive installed in your B2; it will fail to boot on a standard system (and vice versa). I have also provided a small `blinktest` image that you can use to very quickly establish if your USB key will work correctly with U-Boot; see [these notes](https://github.com/sakaki-/gentoo-on-b2/wiki/Quickly-Testing-your-USB-Key-for-Compatibility).
+The images may be downloaded from the links below (or via `wget`, per the following instructions). (Incidentally, the image is now 'universal', and should work, without modification, whether your B2 has an internal hard drive fitted or not.) I have also provided a small `blinktest` image that you can use to very quickly establish if your USB key will work correctly with U-Boot; see [these notes](https://github.com/sakaki-/gentoo-on-b2/wiki/Quickly-Testing-your-USB-Key-for-Compatibility).
 
-Variant | Image | Digital Signature
-:--- | ---: | ---:
-B2 with Internal Drive | [genb2img.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2img.xz) | [genb2img.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2img.xz.asc)
-Diskless B2 | [genb2disklessimg.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2disklessimg.xz) | [genb2disklessimg.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2disklessimg.xz.asc)
-USB Key Compatibility Tester | [blinktestimg.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/blinktestimg.xz) | [blinktestimg.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/blinktestimg.xz.asc)
+Variant | Version | Image | Digital Signature
+:--- | ---: | ---: | ---:
+B2 with or without Internal Drive | 1.1.0 | [genb2img.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.1.0/genb2img.xz) | [genb2img.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.1.0/genb2img.xz.asc)
+USB Key Compatibility Tester | 1.0.0 | [blinktestimg.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/blinktestimg.xz) | [blinktestimg.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/blinktestimg.xz.asc)
+
+The older images are still available [here](https://github.com/sakaki-/gentoo-on-b2/releases).
 
 > Please read the instructions below before proceeding. Also please note that these images are provided 'as is' and without warranty.
 
 ## Prerequisites
 
 To try this out, you will need:
-* A USB key of at least 8GB capacity. I have tested it successfully with a [SanDisk Cruzer Blade 8GB USB 2.0 key](http://www.amazon.co.uk/gp/product/B002U28LZC), a [Lexar 16 GB USB 3.0 key](http://www.amazon.co.uk/gp/product/B008XIYKE8), and with a [Memwah single-slot micro-SD to USB adaptor](http://www.amazon.co.uk/gp/product/B004WFT762) (plus [Samsung 32GB micro-SD card](http://www.amazon.co.uk/gp/product/B00J29BR3Y)); unfortunately, a number of other brands do not work with U-Boot's drivers. You may find this [related list of known-good USB keys](http://forum.doozan.com/read.php?2,1915,page=1) useful. If in doubt, try using my `blinktest` image first to quickly check your USB key for U-Boot compatibility; see [these notes](https://github.com/sakaki-/gentoo-on-b2/wiki/Quickly-Testing-your-USB-Key-for-Compatibility).
-* An Excito B2 (obviously!). If it has an internal hard drive (i.e., it runs the standard Excito software), use the `genb2img.xz` image; if using a diskless chassis, use the `genb2disklessimg.xz` instead.
-* A PC to decompress the appropriate image and write it to the USB key. This is most easily done on a Linux machine of some sort, but tools are also available for Windows (see [here](http://tukaani.org/xz/) and [here](http://sourceforge.net/projects/win32diskimager/), for example). In the instructions below I'm going to assume you're using Linux.
+* A USB key of at least 8GB capacity (the *compressed* (.xz) image is 324MiB, the *uncompressed* image is 14,813,184 (512 byte) sectors = 7,584,350,208 bytes). I have tested it successfully with a [SanDisk Cruzer Blade 8GB USB 2.0 key](http://www.amazon.co.uk/gp/product/B002U28LZC), a [Lexar 16 GB USB 3.0 key](http://www.amazon.co.uk/gp/product/B008XIYKE8), and with a [Memwah single-slot micro-SD to USB adaptor](http://www.amazon.co.uk/gp/product/B004WFT762) (plus [Samsung 32GB micro-SD card](http://www.amazon.co.uk/gp/product/B00J29BR3Y)); unfortunately, a number of other brands do not work with U-Boot's drivers. You may find this [related list of known-good USB keys](http://forum.doozan.com/read.php?2,1915,page=1) useful. If in doubt, try using my `blinktest` image first to quickly check your USB key for U-Boot compatibility; see [these notes](https://github.com/sakaki-/gentoo-on-b2/wiki/Quickly-Testing-your-USB-Key-for-Compatibility).
+* An Excito B2 (obviously!). As of version 1.1.0, the *same* image will work both for the case where you have an internal hard drive in your B2 (the normal situation), *and* for the case where you are running a diskless B2 chassis.
+* A PC to decompress the appropriate image and write it to the USB key (of course, you can also use your B2 for this, assuming it is currently running the standard Excito / Debian system). This is most easily done on a Linux machine of some sort, but tools are also available for Windows (see [here](http://tukaani.org/xz/) and [here](http://sourceforge.net/projects/win32diskimager/), for example). In the instructions below I'm going to assume you're using Linux.
+
+> Incidentally, I also have an [Arch Linux](https://www.archlinux.org/) live USB for the B3, available [here](https://github.com/sakaki-/archlinux-on-b3), and a Gentoo Linux live USB for the B3, available [here](https://github.com/sakaki-/gentoo-on-b3).
 
 ## Downloading and Writing the Image
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2img.xz
-# wget -c https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2img.xz.asc
+# wget -c https://github.com/sakaki-/gentoo-on-b2/releases/download/1.1.0/genb2img.xz
+# wget -c https://github.com/sakaki-/gentoo-on-b2/releases/download/1.1.0/genb2img.xz.asc
 ```
 to fetch the compressed disk image file (324MiB) and its signature.
-> If you want the 'diskless' variant (because you have no internal hard drive in your B2), use:
-```
-# wget -c https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2disklessimg.xz
-# wget -c https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/genb2disklessimg.xz.asc
-```
-instead.
 
 Next, if you like, verify the image using `gpg` (this step is optional):
 ```
 # gpg --keyserver pool.sks-keyservers.net --recv-key DDE76CEA
 # gpg --verify genb2img.xz.asc genb2img.xz
 ```
-> If you downloaded the 'diskless' image, use:
-```
-# gpg --keyserver pool.sks-keyservers.net --recv-key DDE76CEA
-# gpg --verify genb2disklessimg.xz.asc genb2disklessimg.xz
-```
-instead.
 
 Assuming that reports 'Good signature', you can proceed.
 
@@ -62,11 +53,6 @@ Next, insert (into your Linux box) the USB key on which you want to install the 
 ```
 # xzcat genb2img.xz > /dev/sdX && sync
 ```
-> If you downloaded the 'diskless' image, use:
-```
-# xzcat genb2disklessimg.xz > /dev/sdX && sync
-```
-instead.
 
 Substitute the actual USB key device path, for example `/dev/sdc`, for `/dev/sdX` in the above command. Make sure to reference the device, **not** a partition within it (so e.g., `/dev/sdc` and not `/dev/sdc1`; `/dev/sdd` and not `/dev/sdd1` etc.)
 
@@ -114,8 +100,8 @@ All done, you are now ready to try booting your B2!
 
 ## Booting!
 
-Begin with your B2 powered off and the power cable removed. Insert the USB key into either of the USB slots on the back of the B2, and make sure the other USB slot is unoccupied. Connect the B2 to your local network using the **wan** Ethernet port. Then, *while holding down the button on the back of the B2*, apply power (insert the power cable). After five seconds or so, release the button. If all is well, the B2 should boot the kernel off of the USB key (rather than the internal drive), and then proceed to mount the root partition (also from the USB key) and start Gentoo. This will all take about 60 seconds or so:
-* The LED on the front of the B2 should first blink, then turn on solid as Gentoo comes up (approximately 40 seconds after applying power, depending on the speed of your USB key); then
+Begin with your B2 powered off and the power cable removed. Insert the USB key into either of the USB slots on the back of the B2, and make sure the other USB slot is unoccupied. Connect the B2 to your local network using the **wan** Ethernet port. Then, *while holding down the button on the back of the B2*, apply power (insert the power cable). After five seconds or so, release the button. If all is well, the B2 should boot the kernel off of the USB key (rather than the internal drive), and then proceed to mount the root partition (also from the USB key) and start Gentoo. This will all take about 70 seconds or so:
+* The LED on the front of the B2 should first blink, then turn on solid as Gentoo comes up (approximately 50 seconds after applying power, depending on the speed of your USB key); then
 * 20 seconds or so after that, you should be able to `ssh` in (see below for details).
 
 > NB, if, after three minutes or so from applying power, the LED is *still* blinking, then the image has failed to boot. If this happens, and if you believe your USB key [should be compatible](http://forum.doozan.com/read.php?2,1915,page=1) with U-Boot, it is worth powering the B2 off and trying once or twice more (as U-Boot does fail to initialize correctly sometimes).
@@ -133,14 +119,7 @@ Warning: Permanently added '192.168.1.122' (ED25519) to the list of known hosts.
 Password: <type gentoob2 and press Enter>
 b2 ~ # 
 ```
-and you're in! Obviously, substitute the correct network address for your B2 in the command above (if you changed it in `/install/net`, earlier). Also, note that you may receive a different fingerprint type, depending on what your `ssh` client supports. The `ssh` host key fingerprints on the image are as follows:
-> 
-```
-1024 3d:d7:c4:40:4d:b8:26:f0:e0:06:bf:e6:40:97:b2:e0 (DSA)
- 256 18:d5:09:5e:56:62:1f:a1:c9:88:ba:90:2b:39:94:85 (ED25519)
-2048 c9:66:c6:49:ed:0f:32:5a:14:c9:ae:3e:ee:ae:90:7e (RSA1)
-2048 fd:0d:52:d1:3a:3c:c9:f8:78:2b:03:8e:00:b6:80:41 (RSA)
-```
+and you're in! Obviously, substitute the correct network address for your B2 in the command above (if you changed it in `/install/net`, earlier). You may receive a different fingerprint type, depending on what your `ssh` client supports. Also, please note that as of version 1.1.0, the `ssh` host keys are generated on first boot (for security), and so the fingerprint you get will be different from that shown above.
 
 If you have previously connected to a *different* machine with the *same* IP address as your B2 via `ssh` from the client PC, you may need to delete its host fingerprint (from `~/.ssh/known_hosts` on the PC) before `ssh` will allow you to connect.
 
@@ -150,7 +129,7 @@ The supplied image contains a fully-configured Gentoo system (*not* simply a [mi
 
 The full set of packages in the image may be viewed [here](https://github.com/sakaki-/gentoo-on-b2/blob/master/reference/installed-packages) (note that the version numbers shown in this list are Gentoo ebuilds, but they generally map 1-to-1 onto upstream package versions).
 
-The image is based on a `ppc` stage 3 release and minimal install system from Gentoo, but *all* binaries (libraries and executables) have been rebuilt to target the B2's processor (an [MPC8313E](http://cache.freescale.com/files/32bit/doc/data_sheet/MPC8313EEC.pdf?pspll=1) SoC, with an [e300c3](http://cache.freescale.com/files/32bit/doc/ref_manual/e300coreRM.pdf) CPU) specifically. Accordingly, the `CHOST` on the image has been set to `powerpc-e300c3-linux-gnu` (see also the later discussion about using `distcc`). All packages have been brought up-to-date as of 25 January 2015.
+The image is based on a `ppc` stage 3 release and minimal install system from Gentoo, but *all* binaries (libraries and executables) have been rebuilt to target the B2's processor (an [MPC8313E](http://cache.freescale.com/files/32bit/doc/data_sheet/MPC8313EEC.pdf?pspll=1) SoC, with an [e300c3](http://cache.freescale.com/files/32bit/doc/ref_manual/e300coreRM.pdf) CPU) specifically. Accordingly, the `CHOST` on the image has been set to `powerpc-e300c3-linux-gnu` (see also the later discussion about using `distcc`). All packages have been brought up-to-date as of 22 January 2015.
 
 The drivers for WiFi (if you have the hardware on your B2) *are* present, but configuration of WiFi in master mode (using hostapd) is beyond the scope of this short write up (see [here](http://nims11.wordpress.com/2012/04/27/hostapd-the-linux-way-to-create-virtual-wifi-access-point/) for some details). I have created a wireless network service (`net.wlp1s0`) on the image, but this has not been setup to run on boot. Similarly, the **lan** port (`eth1`) interface service exists on the image (`net.eth1`), but is also not setup to run on boot. Feel free to configure these as desired; see [this volume](https://wiki.gentoo.org/wiki/Handbook:AMD64#Gentoo_network_configuration) of the Gentoo Handbook for details.
 
@@ -168,89 +147,53 @@ b2 ~ # reboot
 ```
 and your machine will cleanly restart back into your existing (Excito) system off the hard drive. At this point, you can remove the USB key if you like. You can then, at any later time, simply repeat the 'power up with USB key inserted and button pressed' process to come back into Gentoo - any changes you made will still be present on the USB key. This makes for an easy way to migrate across gradually to Gentoo if you like, without having to disrupt your normal Excito Debian setup (which you can always just reboot back into at any time).
 
-Also, please note that pressing the rear button will _not_ shut down the B2 when running Gentoo (this is a point I still need to address), so if you want to power off cleanly, issue: 
+To power off cleanly (rather than rebooting), you have two options. First (as of version 1.1.0), you can simply press the B2's rear button for around 5 seconds, then release it (just as you would on a regular Excito system). The front LED will start blinking, then turn off once it is safe to physically remove the power cable.
+
+Second, if you'd rather use the command line, you can issue: 
 ```
 b2 ~ # poweroff-b2
 ```
-Wait until the front LED turns off, before physically removing power (the process takes about 30 seconds, in total).
+which will have the same effect (and follow the same power-down LED sequence).
 
 Have fun! ^-^
 
 ## Miscellaneous Points
 
 * The B2's hardware (busses, interrupts etc.) is described by the file `8313E21.dtb` which lives in the 'stock' B2's `/boot` directory (and which is included - in decompiled form - in the [git archive](https://github.com/sakaki-/gentoo-on-b2/blob/master/reference/8313E21.dts) too, for reference).
-* The live USB works because the B2's firmware boot loader will automatically try to run a file called `/install/8313E21.itb` from the first partition of the USB drive when the system is powered up with the rear button depressed. In the provided image, a flattened image tree (FIT, see [here](http://elinux.org/images/f/f4/Elc2013_Fernandes.pdf) and [here](http://www.denx.de/wiki/pub/U-Boot/Documentation/multi_image_booting_scenarios.pdf)) has been placed in that location; this encapsulates both the `8313E21.dtb` file just mentioned, _and_ a bootable kernel, with an internal command line set to `root=/dev/sdb3 rootfstype=ext4 rootdelay=5 console=ttyS0,115200n8`. (The 'diskless' variant uses a command line of `root=/dev/sda3 rootfstype=ext4 rootdelay=5 console=ttyS0,115200n8`.) To avoid having to flash new environment variables for the B2's U-Boot to accomodate the larger 3.18.2 kernel (via [`fw_setenv`](http://forum.mybubba.org/viewtopic.php?f=7&t=2715&p=17607&hilit=printenv#p17607)), I have provided an assembly-language relocation shim which is prepended to the kernel; see [the manpage to `buildkernel-b2`](https://github.com/sakaki-/gentoo-on-b2/raw/master/reference/buildkernel-b2.pdf) for further details.
-* Unlike its [sister B3 project](https://github.com/sakaki-/gentoo-on-b3), the B2 does require a patched kernel to boot (because of custom settings for its USB driver, primarily). The patches used for the kernel in the image are available [here](https://github.com/sakaki-/gentoo-b2-kernel-patches/), and the patched 3.18.2 kernel is best installed via its ebuild [here](https://github.com/sakaki-/gentoo-b2-overlay/tree/master/sys-kernel/buildkernel-b2) (part of my custom `gentoo-b2` [overlay](https://github.com/sakaki-/gentoo-b2-overlay), to which the image is subscribed). The image is additionally subscribed to my `sakaki-tools-lite` [overlay](https://github.com/sakaki-/sakaki-tools-lite).
+* The live USB works because the B2's firmware boot loader will automatically try to run a file called `/install/8313E21.itb` from the first partition of the USB drive when the system is powered up with the rear button depressed. In the provided image, a flattened image tree (FIT, see [here](http://elinux.org/images/f/f4/Elc2013_Fernandes.pdf) and [here](http://www.denx.de/wiki/pub/U-Boot/Documentation/multi_image_booting_scenarios.pdf)) has been placed in that location; this encapsulates both the `8313E21.dtb` file just mentioned, _and_ a bootable kernel, with an internal command line set to `root=PARTUUID=BBF82D16-03 rootfstype=ext4 rootdelay=5 console=ttyS0,115200n8`. To avoid having to flash new environment variables for the B2's U-Boot to accomodate the larger 4.0.4 kernel (via [`fw_setenv`](http://forum.mybubba.org/viewtopic.php?f=7&t=2715&p=17607&hilit=printenv#p17607)), I have provided an assembly-language relocation shim which is prepended to the kernel; see [the manpage to `buildkernel-b2`](https://github.com/sakaki-/gentoo-on-b2/raw/master/reference/buildkernel-b2.pdf) for further details.
+* Unlike its [sister B3 project](https://github.com/sakaki-/gentoo-on-b3), the B2 does require a patched kernel to boot (because of custom settings for its USB driver, primarily). The patches used for the kernel in the image are available [here](https://github.com/sakaki-/gentoo-b2-kernel-patches/), and the patched 4.0.4 kernel is best installed via its ebuild [here](https://github.com/sakaki-/gentoo-b2-overlay/tree/master/sys-kernel/buildkernel-b2) (part of my custom `gentoo-b2` [overlay](https://github.com/sakaki-/gentoo-b2-overlay), to which the image is subscribed). The image is additionally subscribed to my `sakaki-tools-lite` [overlay](https://github.com/sakaki-/sakaki-tools-lite).
 * Because the B2 has a small amount of RAM (256MB), the USB image includes a 1GiB swap partition; this is needed if you want to build large packages (such as `gcc`) locally.
 * If you have a USB key larger than the minimum 8GB, after writing the image you can easily extend the size of the second partition (using `fdisk` and `resize2fs`), so you have more space to work in. See [these instructions](http://geekpeek.net/resize-filesystem-fdisk-resize2fs/), for example.
 
-## Installing Gentoo on your B2's Internal Drive (Optional)
+## <a name="hdd_install">Installing Gentoo on your B2's Internal Drive (Optional)
 
 If you like Gentoo, and want to set it up permanently on the B2's internal hard drive, you can do so easily (it takes less than 10 minutes). The full process is described below. (Note, this is strictly optional, you can simply run Gentoo from the USB key, if you are just experimenting, or using it as a rescue system.)
 
-> **Warning** - the below process will wipe all existing software and data from your internal drive, so be sure to back that up first, before proceeding.
+> **Warning** - the below process will wipe all existing software and data from your internal drive, so be sure to back that up first, before proceeding. It will set up:
+* /dev/sda1 as a 64MiB boot partition, and format it `ext3`;
+* /dev/sda2 as a 1GiB swap partition;
+* /dev/sda3 as a root partition using the rest of the drive, and format it `ext4`.
 
-OK, first, boot into the image and then connect to your B2 via `ssh`, as described above. Then, configure the partition table on your hard drive, as described below (**warning** - this will delete all data and software on there, including your existing Excito system, so only proceed if you are sure). We'll make three partitions, for boot, swap and root (feel free to adopt a different scheme if you like; however, note that you will have to recompile your kernel unless targeting a `root` on `/dev/sda3`):
-```
-b2 ~ # fdisk /dev/sda
-<press o and Enter (to create a new disk label)>
-<press n and Enter (to create a new partition)>
-<press Enter (to make a primary partition)>
-<press Enter (to define partition 1)>
-<press Enter (to accept the default start location)>
-<type +64M and press Enter (to make a 64MiB sector, for boot)>
-<type a and press Enter (to turn the boot flag on)>
-<press n and Enter (to create a new partition)>
-<press Enter (to make a primary partition)>
-<press Enter (to define partition 2)>
-<press Enter (to accept the default start location)>
-<type +1G and press Enter (to make a 1GiB sector, for swap)>
-<type t and press Enter (to change the sector type)>
-<press Enter (to accept changing partition 2's type)>
-<type 82 and press Enter (to set the type as swap)>
-<type n and press Enter (to create a new partition)>
-<press Enter (to make a primary partition)>
-<press Enter (to define partition 3)>
-<press Enter (to accept the default start location)>
-<press Enter (to use all remaining space on the drive)>
-<type p and press Enter (to review the partition table)>
-<type w and press Enter (to write the table and exit)>
-```
+> Note also that the script [`/root/install_on_sda.sh`](https://github.com/sakaki-/gentoo-on-b2/blob/master/reference/install_on_sda.sh) will install using a DOS partition table (max 2TiB); if you'd rather use GPT, then use [`/root/install_on_sda_gpt.sh`](https://github.com/sakaki-/gentoo-on-b2/blob/master/reference/install_on_sda_gpt.sh) instead. The B2 can boot from a GPT-partitioned drive; however, please note that if your HDD has a capacity > 2TiB, then only those B2s flashed with a [relatively modern](http://forum.mybubba.org/viewtopic.php?f=9&t=5745) U-Boot will work correctly. The DOS partition table version should work for any size drive (but will be constrained to a maximum of 2TiB, even if your drive is larger).
 
-Next, format the partitions (NB, do **not** use `ext4` for the boot partition (`/dev/sda1`), as U-Boot will not be able to read it):
+OK, first, boot into the image and then connect to your B2 via `ssh`, as described above. Then, (as of version 1.1.0) you can simply run the supplied script to install onto your hard drive:
 ```
-b2 ~ # mkfs.ext3 /dev/sda1
-b2 ~ # mkswap /dev/sda2
-b2 ~ # mkfs.ext4 /dev/sda3
-```
+b2 ~ # /root/install_on_sda.sh
+Install Gentoo -> /dev/sda (B2's internal HDD)
 
-Now, we need to copy the necessary system information. I have provided a second version of the kernel (in `root`'s home directory) that looks for its `root` partition on `/dev/sda3`, and has no `rootdelay` (but is otherwise identical to the one on the USB key you booted off), so you need to copy that across:
-```
-b2 ~ # mkdir /mnt/{sdaboot,sdaroot}
-b2 ~ # mount /boot
-b2 ~ # mount /dev/sda1 /mnt/sdaboot
-b2 ~ # mount /dev/sda3 /mnt/sdaroot
-b2 ~ # mkdir /mnt/sdaboot/boot
-b2 ~ # cp /root/root-on-sda3-kernel/{uImage,8313E21.dtb,config,System.map} /mnt/sdaboot/boot/
-```
-Note that this kernel will be booted *without* the button pressed down, so it needs to live in the special path `/boot/uImage` on the first sector (which is where we just copied it to, above).
+WARNING - will delete anything currently on HDD
+(including any existing Excito Debian system)
+Please make sure you have adequate backups before proceeding
 
-Next, we'll set up the `root` partition itself. The process below isn't quite what your mother would recommend ^-^, but it gets the job done (the first line may take some time to complete):
-```
-b2 ~ # cp -ax /bin /dev /etc /home /lib /root /sbin /tmp /usr /var /mnt/sdaroot/
-b2 ~ # mkdir /mnt/sdaroot/{boot,media,mnt,opt,proc,run,sys}
-```
-
-Since we simply copied over the `/etc/fstab` file, it will be wrong; a valid copy (for the internal drive) is present in `root`'s home directory on the USB image. Copy it over now:
-```
-b2 ~ # cp /root/fstab-on-b2 /mnt/sdaroot/etc/fstab
-b2 ~ # sed -i 's/vfat/ext3/g' /mnt/sdaroot/etc/fstab
-```
-Finally, `sync` the filesystem, and unmount:
-```
-b2 ~ # sync
-b2 ~ # umount -l /boot /mnt/{sdaboot,sdaroot}
-b2 ~ # rmdir /mnt/{sdaboot,sdaroot}
+Type (upper case) INSTALL and press Enter to continue
+Any other entry quits without installing: <type INSTALL and press Enter, to proceed>
+Installing: check '/var/log/gentoo_install.log' in case of errors
+Step 1 of 5: creating partition table on /dev/sda...
+Step 2 of 5: formatting partitions on /dev/sda...
+Step 3 of 5: mounting boot and root partitions from /dev/sda...
+Step 4 of 5: copying system and bootfiles (please be patient)...
+Step 5 of 5: syncing filesystems and unmounting...
+All done! You can reboot into your new system now.
 ```
 
 That's it! You can now try rebooting your new system (it will have the same initial network settings as the USB version, since we've just copied them over). Issue:
@@ -258,7 +201,7 @@ That's it! You can now try rebooting your new system (it will have the same init
 b2 ~ # reboot
 ```
 And let the system shut down and come back up. **Don't** press the B2's back-panel button this time. The system should boot directly off the hard drive. You can now remove the USB key, if you like, as it's no longer needed.
-> Note - on some SDDs, it can actually take *longer* to boot from the internal drive than from the USB key, because of U-Boot's drivers. Allow an extra 60 seconds or so over the usual boot time for the front LED to stop blinking, before deciding that you have a problem.
+> Note - on some HDDs and SSDs, it can actually take *longer* to boot from the internal drive than from the USB key, because of U-Boot's SATA drivers. Allow an extra 120 seconds or so over the usual boot time for the front LED to stop blinking, before deciding that you have a problem. Once Linux is loaded, it uses its own drivers of course, so this issue only occurs on boot.
 
 Wait for the front light to turn solid on, then after a further 20 seconds or so from your PC on the same subnet issue:
 ```
@@ -268,15 +211,15 @@ b2 ~ #
 ```
 Of course, use whatever IP address you assigned earlier, rather than `192.168.1.122` in the above. Also, if you changed root's password in the USB image, use that new password rather than `gentoob2` in the above.
 
-Once logged in, feel free to configure your system as you like! Of course, if you're intending to use the B2 as an externally visible server, you should change the `ssh` host keys, change `root`'s password, install a firewall etc.
+Once logged in, feel free to configure your system as you like! Of course, if you're intending to use the B2 as an externally visible server, you should take the usual precautions, such as changing `root`'s password, configuring the firewall, possibly [changing the `ssh` host keys](https://missingm.co/2013/07/identical-droplets-in-the-digitalocean-regenerate-your-ubuntu-ssh-host-keys-now/#how-to-generate-new-host-keys-on-an-existing-server), etc.
 
 ### Recompiling the Kernel (Optional)
 
 If you'd like to compile a kernel on your new system, you can do so easily (even if still running from the USB - it has sufficient free space).
 
-Suppose you wish to build 3.18.2 (the same version as supplied in the image), using our [specially patched](https://github.com/sakaki-/gentoo-b2-kernel-patches/) version of the kernel sources. Then you would issue:
+Suppose you wish to build 4.0.4 (the same version as supplied in the image), using our [specially patched](https://github.com/sakaki-/gentoo-b2-kernel-patches/) version of the kernel sources. Then you would issue:
 ```
-b2 ~ # emerge =gentoo-b2-sources-3.18.2
+b2 ~ # emerge =gentoo-b2-sources-4.0.4
    (this will take some time to complete, depending on your network connection)
 b2 ~ # eselect kernel list
    (this will show a numbered list of kernels)
@@ -314,6 +257,8 @@ to deal with any config file clashes that may have been introduced by the upgrad
 > Note that the **kernel** build process for Gentoo is separate (see the previous section for details).
 
 For more information about Gentoo's package management, see [my notes here](https://wiki.gentoo.org/wiki/Sakaki's_EFI_Install_Guide/Installing_the_Gentoo_Stage_3_Files#Gentoo.2C_Portage.2C_Ebuilds_and_emerge_.28Background_Reading.29).
+
+> You may also find it useful to keep an eye on the 'Development' forum at [mybubba.org](http://forum.mybubba.org/index.php), as I occasionally post information about this live-USB there.
 
 ## Have your Gentoo PC Do the Heavy Lifting!
 
