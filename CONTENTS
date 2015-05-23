@@ -39,6 +39,12 @@ reference/genup-lite.pdf
 reference/installed-packages
   Full list of installed packages, from eix-installed all; the version numbers
   are Gentoo ebuilds, but they generally map 1-to-1 onto upstream versions
+reference/install_on_sda_gpt.sh
+  Simple script to install Gentoo onto the B2's internal HDD (optional);
+  this version uses a GPT partition table
+reference/install_on_sda.sh
+  Simple script to install Gentoo onto the B2's internal HDD (optional);
+  this version uses a DOS partition table
 reference/showem-lite.pdf
   PDF version of the manpage for the showem-lite utility (used to monitor
   parallel emerge runs)
