@@ -13,17 +13,17 @@ The images may be downloaded from the links below (or via `wget`, per the follow
 
 Variant | Version | Image | Digital Signature
 :--- | ---: | ---: | ---:
-B2 with or without Internal Drive | 1.1.0 | [genb2img.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.1.0/genb2img.xz) | [genb2img.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.1.0/genb2img.xz.asc)
-USB Key Compatibility Tester | 1.0.0 | [blinktestimg.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/blinktestimg.xz) | [blinktestimg.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.0.0/blinktestimg.xz.asc)
+B2 with or without Internal Drive | 1.2.0 | [genb2img.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.2.0/genb2img.xz) | [genb2img.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.2.0/genb2img.xz.asc)
+USB Key Compatibility Tester | 1.2.0 | [blinktestimg.xz](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.2.0/blinktestimg.xz) | [blinktestimg.xz.asc](https://github.com/sakaki-/gentoo-on-b2/releases/download/1.2.0/blinktestimg.xz.asc)
 
-The older images are still available [here](https://github.com/sakaki-/gentoo-on-b2/releases).
+The older images are still available (together with a short changelog) [here](https://github.com/sakaki-/gentoo-on-b2/releases).
 
 > Please read the instructions below before proceeding. Also please note that these images are provided 'as is' and without warranty.
 
 ## Prerequisites
 
 To try this out, you will need:
-* A USB key of at least 8GB capacity (the *compressed* (.xz) image is 324MiB, the *uncompressed* image is 14,813,184 (512 byte) sectors = 7,584,350,208 bytes). I have tested it successfully with a [SanDisk Cruzer Blade 8GB USB 2.0 key](http://www.amazon.co.uk/gp/product/B002U28LZC), a [Lexar 16 GB USB 3.0 key](http://www.amazon.co.uk/gp/product/B008XIYKE8), and with a [Memwah single-slot micro-SD to USB adaptor](http://www.amazon.co.uk/gp/product/B004WFT762) (plus [Samsung 32GB micro-SD card](http://www.amazon.co.uk/gp/product/B00J29BR3Y)); unfortunately, a number of other brands do not work with U-Boot's drivers. You may find this [related list of known-good USB keys](http://forum.doozan.com/read.php?2,1915,page=1) useful. If in doubt, try using my `blinktest` image first to quickly check your USB key for U-Boot compatibility; see [these notes](https://github.com/sakaki-/gentoo-on-b2/wiki/Quickly-Testing-your-USB-Key-for-Compatibility).
+* A USB key of at least 8GB capacity (the *compressed* (.xz) image is 340MiB, the *uncompressed* image is 14,813,184 (512 byte) sectors = 7,584,350,208 bytes). I have tested it successfully with a [SanDisk Cruzer Blade 8GB USB 2.0 key](http://www.amazon.co.uk/gp/product/B002U28LZC), a [Lexar 16 GB USB 3.0 key](http://www.amazon.co.uk/gp/product/B008XIYKE8), and with a [Memwah single-slot micro-SD to USB adaptor](http://www.amazon.co.uk/gp/product/B004WFT762) (plus [Samsung 32GB micro-SD card](http://www.amazon.co.uk/gp/product/B00J29BR3Y)); unfortunately, a number of other brands do not work with U-Boot's drivers. You may find this [related list of known-good USB keys](http://forum.doozan.com/read.php?2,1915,page=1) useful. If in doubt, try using my `blinktest` image first to quickly check your USB key for U-Boot compatibility; see [these notes](https://github.com/sakaki-/gentoo-on-b2/wiki/Quickly-Testing-your-USB-Key-for-Compatibility).
 * An Excito B2 (obviously!). As of version 1.1.0, the *same* image will work both for the case where you have an internal hard drive in your B2 (the normal situation), *and* for the case where you are running a diskless B2 chassis.
 * A PC to decompress the appropriate image and write it to the USB key (of course, you can also use your B2 for this, assuming it is currently running the standard Excito / Debian system). This is most easily done on a Linux machine of some sort, but tools are also available for Windows (see [here](http://tukaani.org/xz/) and [here](http://sourceforge.net/projects/win32diskimager/), for example). In the instructions below I'm going to assume you're using Linux.
 
@@ -33,10 +33,10 @@ To try this out, you will need:
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/sakaki-/gentoo-on-b2/releases/download/1.1.0/genb2img.xz
-# wget -c https://github.com/sakaki-/gentoo-on-b2/releases/download/1.1.0/genb2img.xz.asc
+# wget -c https://github.com/sakaki-/gentoo-on-b2/releases/download/1.2.0/genb2img.xz
+# wget -c https://github.com/sakaki-/gentoo-on-b2/releases/download/1.2.0/genb2img.xz.asc
 ```
-to fetch the compressed disk image file (324MiB) and its signature.
+to fetch the compressed disk image file (340MiB) and its signature.
 
 Next, if you like, verify the image using `gpg` (this step is optional):
 ```
@@ -160,7 +160,7 @@ Have fun! ^-^
 ## Miscellaneous Points
 
 * The B2's hardware (busses, interrupts etc.) is described by the file `8313E21.dtb` which lives in the 'stock' B2's `/boot` directory (and which is included - in decompiled form - in the [git archive](https://github.com/sakaki-/gentoo-on-b2/blob/master/reference/8313E21.dts) too, for reference).
-* The live USB works because the B2's firmware boot loader will automatically try to run a file called `/install/8313E21.itb` from the first partition of the USB drive when the system is powered up with the rear button depressed. In the provided image, a flattened image tree (FIT, see [here](http://elinux.org/images/f/f4/Elc2013_Fernandes.pdf) and [here](http://www.denx.de/wiki/pub/U-Boot/Documentation/multi_image_booting_scenarios.pdf)) has been placed in that location; this encapsulates both the `8313E21.dtb` file just mentioned, _and_ a bootable kernel, with an internal command line set to `root=PARTUUID=BBF82D16-03 rootfstype=ext4 rootdelay=5 console=ttyS0,115200n8`. To avoid having to flash new environment variables for the B2's U-Boot to accomodate the larger 4.0.4 kernel (via [`fw_setenv`](http://forum.mybubba.org/viewtopic.php?f=7&t=2715&p=17607&hilit=printenv#p17607)), I have provided an assembly-language relocation shim which is prepended to the kernel; see [the manpage to `buildkernel-b2`](https://github.com/sakaki-/gentoo-on-b2/raw/master/reference/buildkernel-b2.pdf) for further details.
+* The live USB works because the B2's firmware boot loader will automatically try to run a file called `/install/8313E21.itb` (or `install/install.itb`, in the case of rev 1 B2s) from the first partition of the USB drive when the system is powered up with the rear button depressed. In the provided image, a flattened image tree (FIT, see [here](http://elinux.org/images/f/f4/Elc2013_Fernandes.pdf) and [here](http://www.denx.de/wiki/pub/U-Boot/Documentation/multi_image_booting_scenarios.pdf)) has been placed in that location; this encapsulates both the `8313E21.dtb` file just mentioned, _and_ a bootable kernel, with an internal command line set to `root=PARTUUID=BBF82D16-03 rootfstype=ext4 rootdelay=5 console=ttyS0,115200n8` (the alternative `install.itb` file has a `bubba.dtb` device tree blob instead of `8313E21.dtb`). To avoid having to flash new environment variables for the B2's U-Boot to accomodate the larger 4.0.4 kernel (via [`fw_setenv`](http://forum.mybubba.org/viewtopic.php?f=7&t=2715&p=17607&hilit=printenv#p17607)), I have provided an assembly-language relocation shim which is prepended to the kernel; see [the manpage to `buildkernel-b2`](https://github.com/sakaki-/gentoo-on-b2/raw/master/reference/buildkernel-b2.pdf) for further details.
 * Unlike its [sister B3 project](https://github.com/sakaki-/gentoo-on-b3), the B2 does require a patched kernel to boot (because of custom settings for its USB driver, primarily). The patches used for the kernel in the image are available [here](https://github.com/sakaki-/gentoo-b2-kernel-patches/), and the patched 4.0.4 kernel is best installed via its ebuild [here](https://github.com/sakaki-/gentoo-b2-overlay/tree/master/sys-kernel/buildkernel-b2) (part of my custom `gentoo-b2` [overlay](https://github.com/sakaki-/gentoo-b2-overlay), to which the image is subscribed). The image is additionally subscribed to my `sakaki-tools-lite` [overlay](https://github.com/sakaki-/sakaki-tools-lite).
 * Because the B2 has a small amount of RAM (256MB), the USB image includes a 1GiB swap partition; this is needed if you want to build large packages (such as `gcc`) locally.
 * If you have a USB key larger than the minimum 8GB, after writing the image you can easily extend the size of the second partition (using `fdisk` and `resize2fs`), so you have more space to work in. See [these instructions](http://geekpeek.net/resize-filesystem-fdisk-resize2fs/), for example.
@@ -258,7 +258,7 @@ to deal with any config file clashes that may have been introduced by the upgrad
 
 For more information about Gentoo's package management, see [my notes here](https://wiki.gentoo.org/wiki/Sakaki's_EFI_Install_Guide/Installing_the_Gentoo_Stage_3_Files#Gentoo.2C_Portage.2C_Ebuilds_and_emerge_.28Background_Reading.29).
 
-> You may also find it useful to keep an eye on the 'Development' forum at [mybubba.org](http://forum.mybubba.org/index.php), as I occasionally post information about this live-USB there.
+> You may also find it useful to keep an eye on the 'Development' forum at [excito.com](http://forum.excito.com/index.php), as I occasionally post information about this live-USB there.
 
 ## Have your Gentoo PC Do the Heavy Lifting!
 

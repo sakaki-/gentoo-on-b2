@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/powerpc 4.0.4-gentoo Kernel Configuration
+# Linux/powerpc 4.0.4-gentoo-r1 Kernel Configuration
 #
 
 #
@@ -1725,7 +1725,11 @@ CONFIG_RTL_CARDS=m
 # CONFIG_RTL8188EE is not set
 # CONFIG_RTL8192EE is not set
 # CONFIG_RTL8821AE is not set
-# CONFIG_RTL8192CU is not set
+CONFIG_RTL8192CU=m
+CONFIG_RTLWIFI=m
+CONFIG_RTLWIFI_USB=m
+CONFIG_RTLWIFI_DEBUG=y
+CONFIG_RTL8192C_COMMON=m
 # CONFIG_WL_TI is not set
 CONFIG_ZD1211RW=m
 # CONFIG_ZD1211RW_DEBUG is not set
