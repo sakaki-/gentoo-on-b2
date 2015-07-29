@@ -22,11 +22,11 @@ configs/b2_stock_config
   The .config from a standard B2 (running Linux 2.6.39), which informed the
   above
 reference/8313E21.dts
-  Device tree description for the B2, reverse compiled from the 8313E21.dtb
-  file, from a shipped B2's /boot directory; this is for rev 2 B2 boards
+  Device tree description for the B2, taken from the 2.6.39 kernel
+  release from Excito; this is for rev 2 B2 boards
 reference/bubba.dts
-  Device tree description for the B2, taken from the community-b3-kernel;
-  this is for rev 1 boards (NB - they are not the same!)
+  Device tree description for the B2, also taken from the 2.6.39 kernel
+  (NB - the two DTS files are not the same!); this is for rev 1 B2 boards
 reference/buildkernel-b2.pdf
   PDF version of the manpage for the buildkernel-b2 utility; explains (inter alia)
   how the kernel relocation shim works
