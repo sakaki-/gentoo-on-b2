@@ -225,7 +225,7 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 			ranges = <0x0 0x25000 0x1000>;
-
+			
 			cell-index = <1>;
 			device_type = "network";
 			model = "eTSEC";
