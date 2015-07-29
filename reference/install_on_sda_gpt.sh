@@ -63,7 +63,7 @@ mount /dev/sda3 /mnt/sdaroot >>"${LOG}" 2>&1
 
 echo "Step 4 of 5: copying system and bootfiles (please be patient)..."
 mkdir -p /mnt/sdaboot/boot >>"${LOG}" 2>&1
-cp -ax /root/root-on-sda3-kernel/{uImage,8313E21.dtb,config,System.map} /mnt/sdaboot/boot/ >>"${LOG}" 2>&1
+cp -ax /root/root-on-sda3-kernel/{uImage,8313E21.dtb,bubba.dtb,config,System.map} /mnt/sdaboot/boot/ >>"${LOG}" 2>&1
 cp -ax /bin /dev /etc /home /lib /root /sbin  /tmp /usr /var /mnt/sdaroot/ >>"${LOG}" 2>&1
 mkdir -p /mnt/sdaroot/{boot,media,mnt,opt,proc,run,sys} >>"${LOG}" 2>&1
 cp /root/fstab-on-b2 /mnt/sdaroot/etc/fstab >>"${LOG}" 2>&1
