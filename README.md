@@ -101,11 +101,11 @@ All done, you are now ready to try booting your B2!
 
 ## Booting!
 
-Begin with your B2 powered off and the power cable removed. Insert the USB key into either of the USB slots on the back of the B2, and make sure the other USB slot is unoccupied. Connect the B2 to your local network using the **wan** Ethernet port. Then, *while holding down the button on the back of the B2*, apply power (insert the power cable). After five seconds or so, release the button. If all is well, the B2 should boot the kernel off of the USB key (rather than the internal drive), and then proceed to mount the root partition (also from the USB key) and start Gentoo. This will all take about 70 seconds or so:
-* The LED on the front of the B2 should first blink, then turn on solid as Gentoo comes up (approximately 50 seconds after applying power, depending on the speed of your USB key); then
-* 20 seconds or so after that, you should be able to `ssh` in (see below for details).
+Begin with your B2 powered off and the power cable removed. Insert the USB key into either of the USB slots on the back of the B2, and make sure the other USB slot is unoccupied. Connect the B2 to your local network using the **wan** Ethernet port. Then, *while holding down the button on the back of the B2*, apply power (insert the power cable). After five seconds or so, release the button. If all is well, the B2 should boot the kernel off of the USB key (rather than the internal drive), and then proceed to mount the root partition (also from the USB key) and start Gentoo. This will all take about 3 minutes or so:
+* The LED on the front of the B2 should first blink, then turn on solid as Gentoo comes up (approximately two minutes after applying power, depending on the speed of your USB key); then
+* a minute or so after that, you should be able to `ssh` in (see below for details).
 
-> NB, if, after three minutes or so from applying power, the LED is *still* blinking, then the image has failed to boot. If this happens, and if you believe your USB key [should be compatible](http://forum.doozan.com/read.php?2,1915,page=1) with U-Boot, it is worth powering the B2 off and trying once or twice more (as U-Boot does fail to initialize correctly sometimes).
+> NB, if, after five minutes or so from applying power, the LED is *still* blinking, then the image has failed to boot. If this happens, and if you believe your USB key [should be compatible](http://forum.doozan.com/read.php?2,1915,page=1) with U-Boot, it is worth powering the B2 off and trying once or twice more (as U-Boot does fail to initialize correctly sometimes).
 > If you are *unsure* if your USB key is compatible, I recommend using my `blinktest` image first, as this will let you check very quickly, without the long delay to write the full image. See [these notes](https://github.com/sakaki-/gentoo-on-b2/wiki/Quickly-Testing-your-USB-Key-for-Compatibility) for details.
 
 ## Connecting to the B2
