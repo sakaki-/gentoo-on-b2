@@ -5,6 +5,7 @@ Bootable live-USB of Gentoo Linux for the Excito B2 miniserver, with Linux 4.9.1
 ## Description
 
 <img src="https://raw.githubusercontent.com/sakaki-/resources/master/excito/b2/Excito_b2.jpg" alt="Excito B2, aka Bubba|TWO" width="250px" align="right"/>
+
 This project contains a bootable, live-USB image for the Excito B2 (aka Bubba|TWO) miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B2's main hard drive. You can even use it on a diskless B2. No soldering, compilation, or [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) flashing is required! You can run it without harming your B2's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence). Also, as with its [sister B3 project](https://github.com/sakaki-/gentoo-on-b3), a number of useful software packages (web server, mail server etc.) are included precompiled with the image (in their 'freshly emerged' configuration state), for convenience.
 
 The kernel used in the image is **4.9.16** from gentoo-b2-sources (i.e., the [kernel.org](https://www.kernel.org) sources, with Gentoo and [B2-specific](https://github.com/sakaki-/gentoo-b2-kernel-patches/) patches applied). The `.config` used for the kernel may be found [here](https://github.com/sakaki-/gentoo-on-b2/blob/master/configs/b2_live_usb_config) in the git archive.
