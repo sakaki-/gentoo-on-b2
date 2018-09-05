@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/powerpc 4.9.16-gentoo Kernel Configuration
+# Linux/powerpc 4.9.72-gentoo Kernel Configuration
 #
 
 #
@@ -364,8 +364,8 @@ CONFIG_PPC_MPC831x=y
 # CONFIG_PPC_86xx is not set
 # CONFIG_EMBEDDED6xx is not set
 # CONFIG_AMIGAONE is not set
-CONFIG_KVM_GUEST=y
-CONFIG_EPAPR_PARAVIRT=y
+# CONFIG_KVM_GUEST is not set
+# CONFIG_EPAPR_PARAVIRT is not set
 # CONFIG_PPC_OF_BOOT_TRAMPOLINE is not set
 CONFIG_IPIC=y
 # CONFIG_MPIC is not set
@@ -892,6 +892,7 @@ CONFIG_BRIDGE=m
 CONFIG_BRIDGE_IGMP_SNOOPING=y
 # CONFIG_BRIDGE_VLAN_FILTERING is not set
 CONFIG_HAVE_NET_DSA=y
+# CONFIG_NET_DSA is not set
 CONFIG_VLAN_8021Q=m
 # CONFIG_VLAN_8021Q_GVRP is not set
 # CONFIG_VLAN_8021Q_MVRP is not set
