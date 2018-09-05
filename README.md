@@ -1,6 +1,6 @@
 # gentoo-on-b2
 
-Bootable live-USB of Gentoo Linux for the Excito B2 miniserver, with Linux 4.9.16
+Bootable live-USB of Gentoo Linux for the Excito B2 miniserver, with Linux 4.9.72 LTS, profile 17.0
 
 ## Description
 
