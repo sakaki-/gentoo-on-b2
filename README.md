@@ -177,6 +177,8 @@ Have fun! ^-^
 
   Nevertheless, if you *don't* want to use this facility, simply issue `eselect profile set default/linux/powerpc/ppc32/17.0` to revert back to the vanilla profile. You'll need to merge back some changes into your `/etc/portage/make.conf`, `/etc/portage/package.use` etc. if you do so however, in order to continue to build packages on your B2 under Gentoo. Refer to the various files [in the custom profile](https://github.com/sakaki-/gentoo-b2-overlay/tree/master/profiles/targets/b2) to see which edits must be made.
 
+* As of release 1.5.0, a weekly cron job (`/etc/cron.weekly/genup`) has been installed, to automate the process of keeping your B2 up-to-date (this can be deleted if you prefer).
+
 ## <a name="hdd_install">Installing Gentoo on your B2's Internal Drive (Optional)
 
 If you like Gentoo, and want to set it up permanently on the B2's internal hard drive, you can do so easily (it takes less than 15 minutes). The full process is described below. (Note, this is strictly optional, you can simply run Gentoo from the USB key, if you are just experimenting, or using it as a rescue system.)
